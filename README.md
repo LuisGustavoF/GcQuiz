@@ -6,7 +6,7 @@ Um quiz bíblico divertido e desafiador para grupos de célula, jovens ou quem q
 
 ## 📸 Tela inicial
 
-![Tela Inicial](./public/screenshot.png)
+![Tela Inicial](./public/Tela_Inicial.png)
 
 ## 🚀 Tecnologias
 - React.js
