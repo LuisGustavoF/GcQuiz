@@ -37,6 +37,9 @@ export default function QuizScreen({
           );
         })}
       </div>
+      <div style={{ marginTop: '10px', fontWeight: 'bold' }}>
+        Tempo restante: {timeLeft}s
+      </div>
     </div>
   );
 }
