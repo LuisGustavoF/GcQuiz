@@ -1,5 +1,5 @@
 const quizData = [
-  // 👶 FÁCEIS (apenas 5 mantidas)
+  //  FÁCEIS 
   {
     question: "Quem foi lançado na cova dos leões?",
     options: ["José", "Daniel", "Davi", "Elias"],
@@ -26,7 +26,7 @@ const quizData = [
     correct: "Abraão",
   },
 
-  // ⚙️ MÉDIAS (5 mantidas)
+  // MÉDIAS
   {
     question: "Quem foi o primeiro rei de Israel?",
     options: ["Saul", "Davi", "Salomão", "Josué"],
@@ -53,7 +53,7 @@ const quizData = [
     correct: "4",
   },
 
- // 📚 LIVROS MENOS CONHECIDOS / REIS / LEIS
+ //  LIVROS MENOS CONHECIDOS 
 {
   question: "Qual rei reinou mais tempo em Judá, segundo os registros bíblicos?",
   options: ["Manassés", "Ezequias", "Salomão", "Josias"],
@@ -106,7 +106,7 @@ const quizData = [
 },
 
 
-  // 🔥 ESPÍRITO SANTO
+  //  ESPÍRITO SANTO
   {
     question: "Em Atos 2, o que apareceu sobre as cabeças dos discípulos?",
     options: ["Línguas como de fogo", "Pombas", "Anjos", "Nuvens"],
@@ -158,7 +158,7 @@ const quizData = [
     correct: "Consolador",
   },
 
-  // ✝️ NOVO TESTAMENTO
+  //  NOVO TESTAMENTO
   {
     question: "Quem escreveu o evangelho mais longo?",
     options: ["Lucas", "Mateus", "João", "Marcos"],
@@ -210,7 +210,7 @@ const quizData = [
     correct: "Belém",
   },
 
-  // 🕳️ PEGADINHAS DIFÍCEIS
+  // PEGADINHAS DIFÍCEIS
   {
     question: "Qual é o último livro do Antigo Testamento na ordem cronológica dos fatos (e não da Bíblia)?",
     options: ["Malaquias", "Neemias", "Esdras", "Ageu"],
