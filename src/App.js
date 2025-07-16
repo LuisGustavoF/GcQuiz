@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react';
 import QuizScreen from './components/QuizScreen';
 import ResultScreen from './components/ResultScreen';
 import quizDataRaw from './quizData';
-import quizCultos from './quizCultos'; // objeto com cultos { nome, data, perguntas, tema }
+import quizCultos from './quizCultos';
 import './App.css';
 
-// Função para formatar a data yyyy-mm-dd para dd/mm/yyyy
 function formatDate(dateStr) {
   if (!dateStr) return '';
   const [year, month, day] = dateStr.split('-');
   return `${day}/${month}/${year}`;
 }
 
-// Função para embaralhar arrays (Fisher-Yates)
 function shuffleArray(array) {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -35,15 +33,13 @@ function App() {
   const [showRanking, setShowRanking] = useState(false);
   const [quizData, setQuizData] = useState([]);
   const [startDate, setStartDate] = useState('');
-  const [answerTimes, setAnswerTimes] = useState([]); // Array para armazenar tempos
+  const [answerTimes, setAnswerTimes] = useState([]);
 
-  const [quizType, setQuizType] = useState('geral'); // 'geral' ou 'culto'
+  const [quizType, setQuizType] = useState('geral');
   const [selectedCulto, setSelectedCulto] = useState('');
 
-  // Tempo total da pergunta (tempo máximo por pergunta)
   const maxTimePerQuestion = 15;
 
-  // Prepara dados toda vez que muda quizType ou selectedCulto
   useEffect(() => {
     setShowModal(true);
     setStarted(false);
@@ -63,7 +59,7 @@ function App() {
     if (started && canAnswer && timeLeft > 0 && current < quizData.length) {
       timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
     } else if (timeLeft === 0 && canAnswer) {
-      handleAnswer(null); // tempo esgotou, considera sem resposta
+      handleAnswer(null);
     }
     return () => clearTimeout(timer);
   }, [timeLeft, started, current, canAnswer, quizData]);
@@ -78,7 +74,6 @@ function App() {
       return;
     }
 
-    // Pega os dados da fonte certa
     let data = [];
     if (quizType === 'geral') {
       data = [...quizDataRaw];
@@ -86,10 +81,8 @@ function App() {
       data = [...quizCultos[selectedCulto].perguntas];
     }
 
-    // Embaralha as perguntas
     data = shuffleArray(data);
 
-    // Embaralha as opções dentro de cada pergunta e limpa selectedAnswer
     const preparedData = data.map(q => ({
       ...q,
       options: shuffleArray(q.options),
@@ -107,7 +100,7 @@ function App() {
     setShowRanking(false);
     setStarted(true);
     setStartDate(new Date().toLocaleString());
-    setAnswerTimes([]); // zera os tempos no início
+    setAnswerTimes([]);
   };
 
   const nextQuestion = () => {
@@ -122,10 +115,7 @@ function App() {
     if (!canAnswer) return;
 
     setSelectedOption(option);
-
-    // Calcula o tempo usado para essa pergunta
     const timeUsed = maxTimePerQuestion - timeLeft;
-
     setAnswerTimes(prevTimes => [...prevTimes, timeUsed]);
 
     setQuizData(prevQuizData => {
@@ -168,7 +158,6 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* MODAL INICIAL */}
       {showModal && !showRanking && (
         <div className="modal">
           {quizType === 'geral' ? (
@@ -204,37 +193,20 @@ function App() {
             <div className="bg-white rounded-lg p-4 shadow text-sm text-gray-800 mb-4">
               <h3 className="font-bold text-center text-lg mb-2">📚 Níveis do Quiz - Perguntas Gerais</h3>
               <ul className="space-y-1" style={{ listStyleType: 'none', paddingLeft: 0 }}>
-                <li>
-                  <strong>😅 Até 10 acertos:</strong> Ateu
-                </li>
-                <li>
-                  <strong>🍼 Até 20 acertos:</strong> Novo convertido
-                </li>
-                <li>
-                  <strong>🧱 +20 acertos:</strong> Crente em construção
-                </li>
-                <li>
-                  <strong>🙏 +35 acertos:</strong> Crente
-                </li>
-                <li>
-                  <strong>📖 +40 acertos:</strong> Aspirante a teólogo
-                </li>
-                <li>
-                  <strong>📚 +45 acertos:</strong> Teólogo
-                </li>
-                <li>
-                  <strong>🌩️ 50 acertos:</strong> Pronto para o arrebatamento
-                </li>
+                <li><strong>😅 Até 10 acertos:</strong> Ateu</li>
+                <li><strong>🍼 Até 20 acertos:</strong> Novo convertido</li>
+                <li><strong>🧱 +20 acertos:</strong> Crente em construção</li>
+                <li><strong>🙏 +35 acertos:</strong> Crente</li>
+                <li><strong>📖 +40 acertos:</strong> Aspirante a teólogo</li>
+                <li><strong>📚 +45 acertos:</strong> Teólogo</li>
+                <li><strong>🌩️ 50 acertos:</strong> Pronto para o arrebatamento</li>
               </ul>
             </div>
           )}
 
           {quizType === 'culto' && (
             <>
-              <label
-                htmlFor="selectCulto"
-                style={{ display: 'block', marginBottom: 6, fontWeight: 'bold' }}
-              >
+              <label htmlFor="selectCulto" style={{ display: 'block', marginBottom: 6, fontWeight: 'bold' }}>
                 Selecione o culto:
               </label>
               <select
@@ -243,9 +215,7 @@ function App() {
                 onChange={(e) => setSelectedCulto(e.target.value)}
                 style={{ marginBottom: 20, padding: '6px 10px', fontSize: 16 }}
               >
-                <option value="" disabled>
-                  -- Escolha um culto --
-                </option>
+                <option value="" disabled>-- Escolha um culto --</option>
                 {Object.entries(quizCultos).map(([key, culto]) => (
                   <option key={key} value={key}>
                     {culto.nome} - {formatDate(culto.data)}
@@ -287,7 +257,6 @@ function App() {
         </div>
       )}
 
-      {/* MODAL RANKING */}
       {showModal && showRanking && (
         <div className="modal">
           <Ranking />
@@ -295,7 +264,6 @@ function App() {
         </div>
       )}
 
-      {/* QUIZ */}
       {started && current < quizData.length && (
         <>
           <QuizScreen
@@ -319,7 +287,6 @@ function App() {
         </>
       )}
 
-      {/* RESULTADO */}
       {started && current >= quizData.length && (
         <ResultScreen
           playerName={playerName}
@@ -329,7 +296,7 @@ function App() {
           quizData={quizData}
           quizType={quizType}
           startDate={startDate}
-          answerTimes={answerTimes} // passa os tempos para o resultado
+          answerTimes={answerTimes}
         />
       )}
     </div>
