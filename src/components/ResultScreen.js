@@ -1,4 +1,3 @@
-// Atualiza o ResultScreen para gerar PDF com tempo total e média
 import React from 'react';
 import jsPDF from 'jspdf';
 
