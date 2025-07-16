@@ -1,4 +1,3 @@
-// src/components/StartScreen.js
 import React, { useState } from 'react';
 
 function StartScreen({ onStart }) {
